@@ -1,9 +1,9 @@
 # Reviewed PyPI wheel allowlist for Windows CPython 3.14.7 (arm64).
 # Keep LF line endings. Includes the complete runtime dependency closure.
 # Generated/reviewed with scripts/Test-PipLocks.py; no source distributions.
-# https://pypi.org/pypi/certifi/2026.7.22/json
-# certifi-2026.7.22-py3-none-any.whl
-certifi==2026.7.22 --hash=sha256:62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775
+# https://pypi.org/pypi/certifi/2026.10.23/json
+# certifi-2026.10.23-py3-none-any.whl
+certifi==2026.10.23 --hash=sha256:e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1
 # https://pypi.org/pypi/charset-normalizer/3.5.1/json
 # charset_normalizer-3.5.1-cp314-cp314-win_arm64.whl
 charset-normalizer==3.5.1 --hash=sha256:4bea7f8ebe90bbd7f0e4a2de42ca6924ba23e3e76418c408ff82f1d46fabd687
@@ -31,9 +31,9 @@ urllib3==2.8.0 --hash=sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475
 # https://pypi.org/pypi/websockets/17.1/json
 # websockets-17.1-cp314-cp314-win_arm64.whl
 websockets==17.1 --hash=sha256:46c0331c9eaaf73a559f3a9e388466be0df96eb83d40f06f1ca6ab6613b35c82
-# https://pypi.org/pypi/yt-dlp/2026.8.19/json
-# yt_dlp-2026.8.19-py3-none-any.whl
-yt-dlp==2026.8.19 --hash=sha256:1d57897e94c6665a0a6f9bc54b34e584284e32c034ffab3a7df25d8f7b24eedf
+# https://pypi.org/pypi/yt-dlp/2026.10.21/json
+# yt_dlp-2026.10.21-py3-none-any.whl
+yt-dlp==2026.10.21 --hash=sha256:94a3a3e2c423129d0bbd2f1be000c4171fa1226c29e251c84aff868f2851c247
 # https://pypi.org/pypi/yt-dlp-ejs/0.8.0/json
 # yt_dlp_ejs-0.8.0-py3-none-any.whl
 yt-dlp-ejs==0.8.0 --hash=sha256:79300e5fca7f937a1eeede11f0456862c1b41107ce1d726871e0207424f4bdb4

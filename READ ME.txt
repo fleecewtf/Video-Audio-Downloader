@@ -1,6 +1,7 @@
 VIDEO + AUDIO DOWNLOADER
 
-AUDIT UPDATE v1.0.16
+SECURITY UPDATE v1.0.17
+Updates yt-dlp and its certificate trust bundle, with hash-verified setup dependencies.
 Shared setup: extract the complete official ZIP, run Installer.bat, accept the
 bundled Terms/Tool License, wait for every final check, then use the folder-local
 shortcut. Setup needs no administrator access and keeps Python private.
@@ -33,6 +34,12 @@ SETUP DETAILS
 Setup keeps official Python 3.14.7, PySide6-Essentials, yt-dlp, yt-dlp-ejs, FFmpeg, FFprobe, Deno, settings, and app-specific files private to this folder. It does not require administrator access, change PATH, or install global Python packages. Downloaded runtime archives and dependency wheels are SHA-256 verified before use. Setup automatically uses the x64 or ARM64 dependency lock and verifies that bundled lock before installation or repair.
 
 Setup creates and validates a folder-local Video + Audio Downloader shortcut that starts the app directly with this folder's private runtime. Run Installer.bat again to repair setup or after moving the complete folder. The selected save folder, format, and quality are preserved.
+
+FFmpeg and FFprobe are separate BtbN GPL programs. FFMPEG-SOURCES.txt identifies
+their exact binaries and matching public source distribution. Setup retains the
+full GPL license, source notice, and build configuration under .runtime\ffmpeg.
+Fleece's license does not restrict those third-party rights. On ARM64 Windows,
+these x64 media programs depend on Windows x64 emulation.
 
 PRIVACY AND REMOVAL
 

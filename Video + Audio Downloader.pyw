@@ -16,12 +16,12 @@ from urllib.parse import urlparse
 
 APP_DIR = Path(__file__).resolve().parent
 APP_NAME = "Video + Audio Downloader"
-APP_VERSION = "1.0.16"
+APP_VERSION = "1.0.17"
 PYSIDE_VERSION = "6.11.2"
-YTDLP_VERSION = "2026.8.19"
+YTDLP_VERSION = "2026.10.21"
 YTDLP_EJS_VERSION = "0.8.0"
-FFMPEG_VERSION = "9.0.2"
-DENO_VERSION = "2.9.7"
+FFMPEG_VERSION = "n9.0.2-36-g6882969ce9-20261026"
+DENO_VERSION = "2.9.8"
 FRAGMENT_WORKERS = max(1, min(4, (os.cpu_count() or 2) // 2))
 PROCESS_READ_CHUNK_BYTES = 65536
 PROCESS_EVENT_READ_BYTES = 8192
@@ -1995,7 +1995,7 @@ class VideoDownloader(QMainWindow):
 
 
 def run_self_test(output_dir):
-    assert APP_VERSION == "1.0.16"
+    assert APP_VERSION == "1.0.17"
     output_dir = Path(output_dir).resolve()
     checks = []
 

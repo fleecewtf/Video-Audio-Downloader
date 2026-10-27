@@ -2,9 +2,11 @@
 
 # video + audio downloader
 
-Current audit update: **v1.0.16**. Includes app-specific bug fixes and shared setup hardening.
+Current release: **v1.0.17**. Updates yt-dlp and its certificate trust bundle, with hash-verified setup dependencies.
 
-All Fleece desktop tools use the same installation workflow: download the official ZIP, extract the entire folder, run `Installer.bat`, accept the bundled Terms/Tool License, wait for final checks, then open the folder-local shortcut. Setup installs a private runtime without changing system Python or requiring administrator access. Rerun it to repair or refresh a moved shortcut. Keep the full path at most 72 characters, without percent signs. Architecture support and extra components vary by tool; File Converter remains x64-only.
+**Small installer:** Download the small installer ZIP, extract the entire folder, run `Installer.bat`, accept the Terms and bundled Tool License, wait for final checks, then open the folder-local shortcut. Setup keeps its runtime private without changing system Python or PATH or requiring administrator access. Rerun it to repair or refresh a moved shortcut. Keep the full path at most 72 characters, without percent signs. The small installer retains this tool's documented architecture support; File Converter remains x64-only.
+
+**Ready-to-run (Windows x64):** A larger ZIP includes the private runtime already bundled. Extract the entire folder, open `Video + Audio Downloader.exe`, and accept the Terms and bundled Tool License on first use. There is no `Installer.bat` step and no system Python or PATH change. Keep the EXE with the rest of the folder. This option is x64, not native ARM64; the setup instructions below describe the small installer option.
 
 A little tool I made with AI to download videos and audio from yt-dlp-supported sites locally on 64-bit Windows.
 
@@ -44,6 +46,8 @@ Keep the full extracted folder path at 72 characters or fewer so Windows can ins
 Setup keeps the private Python runtime, dependencies, settings, and every app component inside the extracted folder. It does not require administrator access, change PATH, or install global Python packages. The generated folder-local shortcut starts the app directly with that private runtime, so Microsoft Store or system Python is not required.
 
 Setup pins and verifies official Python 3.14.7, pip, PySide6-Essentials, yt-dlp, yt-dlp-ejs, FFmpeg, FFprobe, and Deno. Downloaded runtime archives and dependency wheels are checked against pinned SHA-256 hashes before use. Setup automatically chooses the x64 or ARM64 dependency lock and verifies that bundled lock before installation or repair.
+
+The separate FFmpeg/FFprobe programs use a pinned BtbN GPL build. Setup retains its full license, source notice, and build configuration. [FFMPEG-SOURCES.txt](FFMPEG-SOURCES.txt) identifies the exact binaries and matching public source distribution; Fleece's license does not restrict those third-party rights. On ARM64 Windows, these x64 media programs depend on Windows x64 emulation.
 
 ### v1.0.15 security update
 

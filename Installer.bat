@@ -90,11 +90,11 @@ set "PYSIDE_DISTRIBUTION=PySide6-Essentials"
 set "PYPI_INDEX=https://pypi.org/simple"
 set "PIP_WHEEL_URL=https://files.pythonhosted.org/packages/f3/6e/1736e5b4ae2b778ef2f81c47d797de9f891d4d8acb047a24ca37a60294dd/pip-26.2.1-py3-none-any.whl"
 set "PIP_WHEEL_SHA256=71138ADF1F4CA900CDB7D289C21B7494329F2332B6D85F0E1C42108C0384ED3E"
-set "YTDLP_VERSION=2026.8.19"
+set "YTDLP_VERSION=2026.10.21"
 set "YTDLP_EJS_VERSION=0.8.0"
 set "YTDLP_EJS_CORE_SHA256=18DA6CE0758B416E7AE645084F4F8801F9F9D59D6C477C05EAA0FF94EBD8CC00"
 set "YTDLP_EJS_LIB_SHA256=C55987FE697E5B9EE18830163F7AF85327E9BB5C3E674B969D38C8D205EAA577"
-set "CERTIFI_VERSION=2026.7.22"
+set "CERTIFI_VERSION=2026.10.23"
 set "CHARSET_NORMALIZER_VERSION=3.5.1"
 set "IDNA_VERSION=3.20"
 set "MUTAGEN_VERSION=1.48.1"
@@ -105,10 +105,14 @@ set "WEBSOCKETS_VERSION=17.1"
 set "BROTLI_VERSION=1.2.0"
 set YTDLP_RUNTIME_PACKAGES="certifi==%CERTIFI_VERSION%" "charset-normalizer==%CHARSET_NORMALIZER_VERSION%" "idna==%IDNA_VERSION%" "mutagen==%MUTAGEN_VERSION%" "pycryptodomex==%PYCRYPTODOMEX_VERSION%" "requests==%REQUESTS_VERSION%" "urllib3==%URLLIB3_VERSION%" "websockets==%WEBSOCKETS_VERSION%"
 set "YTDLP_ARCH_PACKAGE="
-set "FFMPEG_VERSION=9.0.2"
-set "DENO_VERSION=2.9.7"
-set "FFMPEG_URL=https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-essentials_build.zip"
-set "FFMPEG_SHA256=60F467265B1E312373DBCD92200C2618A74850F98D3D078E94296BB3FA2047BA"
+set "FFMPEG_VERSION=n9.0.2-36-g6882969ce9-20261026"
+set "DENO_VERSION=2.9.8"
+set "FFMPEG_URL=https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-26-14-25/ffmpeg-n9.0.2-36-g6882969ce9-win64-gpl-9.0.zip"
+set "FFMPEG_SHA256=10A8E6C92D82AB5AF285E736F63A871DB30568D311B33A87B0ECB2477CEB8292"
+set "FFMPEG_EXE_SHA256=10B9E38681AC8F73109291EDBD88AEA2E3F32CE04B562D1A6DF679D76F455910"
+set "FFPROBE_EXE_SHA256=BC7540799B82E4F92F6273147014BA37B6C2C8A1B2BE0477EFD56CAFD2D1B93E"
+set "FFMPEG_LICENSE_SHA256=8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+set "FFMPEG_SOURCE_MANIFEST=%ROOT%FFMPEG-SOURCES.txt"
 
 set "NATIVE_ARCH=%PROCESSOR_ARCHITECTURE%"
 if defined PROCESSOR_ARCHITEW6432 set "NATIVE_ARCH=%PROCESSOR_ARCHITEW6432%"
@@ -122,16 +126,16 @@ set "ARCH=x64"
 set YTDLP_ARCH_PACKAGE="Brotli==%BROTLI_VERSION%"
 set "PYTHON_URL=https://www.python.org/ftp/python/3.14.7/python-3.14.7-embed-amd64.zip"
 set "PYTHON_SHA256=D297E5FF019966817AD8502465176139F2D3D840FA4ED84B13BED399A6AB1F15"
-set "DENO_URL=https://github.com/denoland/deno/releases/download/v2.9.7/deno-x86_64-pc-windows-msvc.zip"
-set "DENO_SHA256=A0C3101B4158D1DFB7D6A78A7BF0F3DE80C96BB423C152BEEC8BEB22786F2238"
+set "DENO_URL=https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.zip"
+set "DENO_SHA256=CBA84B26E0DF5AE7F74FC66B86A95B866872A86292EBD84FA1E959927EDD93BF"
 goto ArchitectureReady
 
 :ArchitectureArm64
 set "ARCH=arm64"
 set "PYTHON_URL=https://www.python.org/ftp/python/3.14.7/python-3.14.7-embed-arm64.zip"
 set "PYTHON_SHA256=F6773983C8959D4281E48C4540CB0BDD23E42391E4E951CE17E7CEB52658F21C"
-set "DENO_URL=https://github.com/denoland/deno/releases/download/v2.9.7/deno-aarch64-pc-windows-msvc.zip"
-set "DENO_SHA256=C4C4AC8BFDAA37814BDA5C05FC9CDF2154904E2EF8277673A30BDCEAAA649807"
+set "DENO_URL=https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.zip"
+set "DENO_SHA256=B413B92B735B50C198E8FE3B85AF1AA50E29D5F72E229AAB701D132286E14CEF"
 
 :ArchitectureReady
 set "PIP_REQUIREMENTS=%ROOT%requirements-win-%ARCH%.txt"
@@ -154,6 +158,11 @@ if errorlevel 1 (
 if not exist "%ROOT%LICENSE" (
     set "FAIL_MESSAGE=The bundled Tool License is missing from this folder. Extract a fresh official release and try again."
     set "REPAIR_HINT=Re-extract the complete official ZIP, including LICENSE, then run Installer.bat again."
+    goto Failed
+)
+if not exist "%FFMPEG_SOURCE_MANIFEST%" (
+    set "FAIL_MESSAGE=The bundled FFmpeg source and license notice is missing."
+    set "REPAIR_HINT=Extract the entire official ZIP again, including FFMPEG-SOURCES.txt, then retry."
     goto Failed
 )
 "%POWERSHELL_EXE%" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "if([IO.Path]::GetFullPath($env:ROOT).Length -gt [int]$env:MAX_ROOT_LENGTH){exit 2}" >nul 2>nul
@@ -787,16 +796,16 @@ exit /b %PACKAGE_TRANSACTION_CODE%
 
 :CheckDependencyLock
 set "PIP_REQUIREMENTS_SHA256="
-if /I "%ARCH%"=="x64" set "PIP_REQUIREMENTS_SHA256=e91234bb8eb9dbe6555a9a03101500e065488834e1d40939630c99acfb415f20"
-if /I "%ARCH%"=="arm64" set "PIP_REQUIREMENTS_SHA256=9dd5fa00bc1f5192291ab0281c75a975284ba141222f7dee51af5249606625cd"
+if /I "%ARCH%"=="x64" set "PIP_REQUIREMENTS_SHA256=5c11efaebb4f189502243552359e9b9c892aaafb34785278407fd4e6c8fe43e4"
+if /I "%ARCH%"=="arm64" set "PIP_REQUIREMENTS_SHA256=982fa0d8f694c88aa6f6f5184a77fe5292aff9859ddb74b6c28defbae5ed10dc"
 if not defined PIP_REQUIREMENTS_SHA256 exit /b 1
 "%POWERSHELL_EXE%" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $item=Get-Item -LiteralPath $env:PIP_REQUIREMENTS -Force; if($item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'Dependency lock is unsafe'}; $stream=[IO.File]::OpenRead($item.FullName); $sha=[Security.Cryptography.SHA256]::Create(); try{$digest=([BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-',''); if($digest -ne $env:PIP_REQUIREMENTS_SHA256){throw 'Dependency lock SHA-256 mismatch'}}finally{$stream.Dispose();$sha.Dispose()}" >>"%LOG%" 2>&1
 exit /b %ERRORLEVEL%
 
 :ValidatePipRequirements
 set "PIP_REQUIREMENTS_SHA256="
-if /I "%ARCH%"=="x64" set "PIP_REQUIREMENTS_SHA256=e91234bb8eb9dbe6555a9a03101500e065488834e1d40939630c99acfb415f20"
-if /I "%ARCH%"=="arm64" set "PIP_REQUIREMENTS_SHA256=9dd5fa00bc1f5192291ab0281c75a975284ba141222f7dee51af5249606625cd"
+if /I "%ARCH%"=="x64" set "PIP_REQUIREMENTS_SHA256=5c11efaebb4f189502243552359e9b9c892aaafb34785278407fd4e6c8fe43e4"
+if /I "%ARCH%"=="arm64" set "PIP_REQUIREMENTS_SHA256=982fa0d8f694c88aa6f6f5184a77fe5292aff9859ddb74b6c28defbae5ed10dc"
 if not defined PIP_REQUIREMENTS_SHA256 exit /b 1
 "%APP_PY%" -I -c "import hashlib, os, stat; from pathlib import Path; path=Path(os.environ['PIP_REQUIREMENTS']); info=path.stat(follow_symlinks=False); assert stat.S_ISREG(info.st_mode) and not path.is_symlink() and not (getattr(info, 'st_file_attributes', 0) & 1024), 'Dependency lock is unsafe'; assert hashlib.sha256(path.read_bytes()).hexdigest() == os.environ['PIP_REQUIREMENTS_SHA256'], 'Dependency lock SHA-256 mismatch'" >>"%LOG%" 2>&1
 if not errorlevel 1 exit /b 0
@@ -884,6 +893,11 @@ exit /b %ERRORLEVEL%
 :ValidateFfmpeg
 if not exist "%FFMPEG_EXE%" exit /b 1
 if not exist "%FFPROBE_EXE%" exit /b 1
+if not exist "%FFMPEG_DIR%\LICENSE.txt" exit /b 1
+if not exist "%FFMPEG_DIR%\FFMPEG-SOURCES.txt" exit /b 1
+if not exist "%FFMPEG_DIR%\BUILD-CONFIG.txt" exit /b 1
+"%POWERSHELL_EXE%" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $digest={param($path) $stream=[IO.File]::OpenRead($path); $sha=[Security.Cryptography.SHA256]::Create(); try{([BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-','')}finally{$stream.Dispose();$sha.Dispose()}}; $expected=@{($env:FFMPEG_EXE)=$env:FFMPEG_EXE_SHA256;($env:FFPROBE_EXE)=$env:FFPROBE_EXE_SHA256;([IO.Path]::Combine($env:FFMPEG_DIR,'LICENSE.txt'))=$env:FFMPEG_LICENSE_SHA256}; foreach($p in $expected.Keys){$item=Get-Item -LiteralPath $p -Force; if($item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)){throw 'Unsafe FFmpeg file'}; if((& $digest $p) -ne $expected[$p]){throw 'FFmpeg component SHA-256 mismatch'}}; $notice=Join-Path $env:FFMPEG_DIR 'FFMPEG-SOURCES.txt'; if((& $digest $notice) -ne (& $digest $env:FFMPEG_SOURCE_MANIFEST)){throw 'FFmpeg source notice mismatch'}" >>"%LOG%" 2>&1
+if errorlevel 1 exit /b 1
 set "FFMPEG_CHECK=%RUNTIME%\ffmpeg-check.txt"
 "%FFMPEG_EXE%" -version >"%FFMPEG_CHECK%" 2>&1
 if errorlevel 1 exit /b 1
@@ -913,7 +927,7 @@ if exist "%FFMPEG_NEW%" exit /b 1
 set "ARCHIVE_FILE=%FFMPEG_ARCHIVE%"
 set "EXTRACT_DIR=%FFMPEG_EXTRACT%"
 set "NEW_DIR=%FFMPEG_NEW%"
-"%POWERSHELL_EXE%" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; Expand-Archive -LiteralPath $env:ARCHIVE_FILE -DestinationPath $env:EXTRACT_DIR -Force; $ff=Get-ChildItem -LiteralPath $env:EXTRACT_DIR -Filter ffmpeg.exe -File -Recurse | Select-Object -First 1; $fp=Get-ChildItem -LiteralPath $env:EXTRACT_DIR -Filter ffprobe.exe -File -Recurse | Select-Object -First 1; if(-not $ff -or -not $fp){throw 'FFmpeg archive did not contain both required programs.'}; New-Item -ItemType Directory -Path $env:NEW_DIR -Force | Out-Null; Copy-Item -LiteralPath $ff.FullName -Destination (Join-Path $env:NEW_DIR 'ffmpeg.exe') -Force; Copy-Item -LiteralPath $fp.FullName -Destination (Join-Path $env:NEW_DIR 'ffprobe.exe') -Force" >>"%LOG%" 2>&1
+"%POWERSHELL_EXE%" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; Expand-Archive -LiteralPath $env:ARCHIVE_FILE -DestinationPath $env:EXTRACT_DIR -Force; $package=Join-Path $env:EXTRACT_DIR 'ffmpeg-n9.0.2-36-g6882969ce9-win64-gpl-9.0'; New-Item -ItemType Directory -Path $env:NEW_DIR -Force | Out-Null; foreach($name in @('ffmpeg.exe','ffprobe.exe')){Copy-Item -LiteralPath (Join-Path $package ('bin\'+$name)) -Destination (Join-Path $env:NEW_DIR $name) -Force}; Copy-Item -LiteralPath (Join-Path $package 'LICENSE.txt') -Destination (Join-Path $env:NEW_DIR 'LICENSE.txt') -Force; Copy-Item -LiteralPath $env:FFMPEG_SOURCE_MANIFEST -Destination (Join-Path $env:NEW_DIR 'FFMPEG-SOURCES.txt') -Force; $process=Start-Process -FilePath (Join-Path $env:NEW_DIR 'ffmpeg.exe') -ArgumentList '-buildconf' -WindowStyle Hidden -Wait -PassThru -RedirectStandardError (Join-Path $env:NEW_DIR 'BUILD-CONFIG.txt'); if($process.ExitCode -ne 0){throw 'FFmpeg build configuration could not be read'}" >>"%LOG%" 2>&1
 if errorlevel 1 exit /b 1
 
 set "OLD_FFMPEG_DIR=%FFMPEG_DIR%"
