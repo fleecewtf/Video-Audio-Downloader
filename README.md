@@ -67,6 +67,20 @@ Run `Installer.bat` again to repair the private components or after moving the c
 
 Site behavior changes over time. Run the newest installer whenever a supported site reports an extractor or JavaScript-runtime error.
 
+## source code
+
+Both download options use the same [Python app source](Video%20%2B%20Audio%20Downloader.pyw). [ReadyLauncher.cs](ReadyLauncher.cs) is the complete C# source of the ready-to-run EXE launcher; it starts that app with the bundled private Python runtime. The EXE does not replace the Python application with native machine code.
+
+The release's [Video-Audio-Downloader-v1.0.17-Source.zip](https://github.com/fleecewtf/Video-Audio-Downloader/releases/download/v1.0.17/Video-Audio-Downloader-v1.0.17-Source.zip) includes both sources, setup/dependency definitions, licenses, and assets, without installed runtimes, user data, or developer tests. The same source is mirrored on GitLab. Fleece's source-available Tool License applies; this is not an open-source license.
+
+To compile the x64 launcher with Windows .NET Framework:
+
+```bat
+"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:winexe /platform:x64 /optimize+ /out:"Video + Audio Downloader.exe" ReadyLauncher.cs
+```
+
+This builds the launcher only, not Python or its dependencies. Keep the matching app files and private runtime together as described above; `Installer.bat` records the pinned component versions. Adding a Windows icon when compiling is optional. No test or packaging-helper folder is required in the public source tree.
+
 ## built with
 
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp)
